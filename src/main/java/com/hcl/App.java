@@ -42,6 +42,7 @@ public class App {
 	    
 	    System.out.printf("Sum of %d and %d = %d", firstNumber, secondNumber, sum);
 
+	    System.out.printf("---------------------------");
 	    // closes the scanner
 	    input.close();
 	}
