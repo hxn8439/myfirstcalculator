@@ -19,9 +19,48 @@ import java.util.Scanner;
  * menu driven
  */
 public class App {
-	public static void main(String[] args) {
+	
+	public static void add(int firstN, int secondN)
+	{
+	    int sum = firstN+secondN;
+	    
+	    System.out.printf("Sum of %d and %d = %d", firstN, secondN, sum);
+	    System.out.println("\n");
+	}
+	
+	public static void subtract(int firstN, int secondN)
+	{
+		int sum = firstN-secondN;
+	    
+	    System.out.printf("Subtraction of %d and %d = %d", firstN, secondN, sum);
+	    System.out.println("\n");
+	}
+	
+	public static void divide(int firstN, int secondN)
+	{
+		int sum = firstN/secondN;
+	    
+	    System.out.printf("division of %d and %d = %d", firstN, secondN, sum);
+	    System.out.println("\n");
+	}
+	
+	
+	public static void multiply(int firstN, int secondN)
+	{
+		int sum = firstN*secondN;
+	    
+	    System.out.printf("Multiplication of %d and %d = %d", firstN, secondN, sum);
+	    System.out.println("\n");
+	}
+	
+	
+	
+	
+	
+	public static void main(String[] args) 
+	{
 		//Poor mans banner
-		System.out.println("Hello World! I am a great calculator :-) ;-) ");
+		System.out.println("Welcome to a simple calculator (^>=<^) ");
 		
 		// creates an object of Scanner
 	    Scanner input = new Scanner(System.in);
@@ -37,12 +76,49 @@ public class App {
 	    // takes 2st number
 	    int secondNumber = input.nextInt();
 	    
-	    //operation add only
-	    int sum = firstNumber + secondNumber;
+	    boolean state = true;
 	    
-	    System.out.printf("Sum of %d and %d = %d", firstNumber, secondNumber, sum);
+	    while(state)
+	    {
+	    	System.out.println("\n please enter number which math operations do you want to perform? ");
+	    	System.out.println("1.Addition");
+	    	System.out.println("2.Subtraction");
+	    	System.out.println("3.Multiplication");
+	    	System.out.println("4.Division");
+	    	System.out.println("5.Exit program");
+	    	System.out.println("\n");
+	    	
+	    	int mathinput=input.nextInt();
+	    	
+	    	if(mathinput == 1)
+	    	{
+	    		add(firstNumber, secondNumber);
+	    	}	
+	    	
+	    	if(mathinput == 2)
+	    	{
+	    		subtract(firstNumber, secondNumber);
+	    	}	
+	    	
+	    	if(mathinput == 3)
+	    	{
+	    		multiply(firstNumber, secondNumber);
+	    	}	
+	    	
+	    	if(mathinput == 4)
+	    	{
+	    		divide(firstNumber, secondNumber);
+	    	}	
+	    	
+	    	if(mathinput == 5)
+	    	{
+	    		state = false;
+	    	}	
 
-	    System.out.printf("---------------------------");
+	    }	
+	    
+	    System.out.println("Program exits...Have a nice day!! :) ");
+	    
 	    // closes the scanner
 	    input.close();
 	}
