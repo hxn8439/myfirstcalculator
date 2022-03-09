@@ -2,6 +2,14 @@ package com.hcl;
 
 import java.util.Scanner;
 
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.BufferedWriter;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * Hello world! We need to build a calculator based Command line app where for
  * each operation, it should take 2 numbers and either add, substract, multiply
@@ -20,44 +28,108 @@ import java.util.Scanner;
  */
 public class App {
 	
-	public static void add(int firstN, int secondN)
+	public static void add(int firstN, int secondN, String file) throws IOException
 	{
-	    int sum = firstN+secondN;
-	    
-	    System.out.printf("Sum of %d and %d = %d", firstN, secondN, sum);
+		int output = firstN+secondN;
+	    System.out.printf("Sum of %d and %d = %d", firstN, secondN, output);
 	    System.out.println("\n");
+	    
+	    String oper = "+";
+	    String row = oper+","+firstN+","+secondN+","+output;
+	    
+	    try 
+	    {
+	    	BufferedWriter w = new BufferedWriter(new FileWriter(file, true));
+	    	w.write(row);
+	    	w.write("\r");
+	    	w.close();
+	    }
+	    
+	    catch (IOException e)
+	    {
+	    	e.getStackTrace();
+	    }
+		
 	}
 	
-	public static void subtract(int firstN, int secondN)
+	public static void subtract(int firstN, int secondN, String file) throws IOException
 	{
-		int sum = firstN-secondN;
-	    
-	    System.out.printf("Subtraction of %d and %d = %d", firstN, secondN, sum);
+		int output = firstN-secondN;
+	    System.out.printf("Subtraction of %d and %d = %d", firstN, secondN, output);
 	    System.out.println("\n");
+	    
+	    String oper = "-";
+	    String row = oper+","+firstN+","+secondN+","+output;
+	    
+	    try 
+	    {
+	    	BufferedWriter w = new BufferedWriter(new FileWriter(file, true));
+	    	w.write(row);
+	    	w.write("\r");
+	    	w.close();
+	    }
+	    
+	    catch (IOException e)
+	    {
+	    	e.getStackTrace();
+	    }
 	}
 	
-	public static void divide(int firstN, int secondN)
+	public static void divide(int firstN, int secondN, String file) throws IOException
 	{
-		int sum = firstN/secondN;
-	    
-	    System.out.printf("division of %d and %d = %d", firstN, secondN, sum);
+		int output = firstN/secondN;
+	    System.out.printf("Division of %d and %d = %d", firstN, secondN, output);
 	    System.out.println("\n");
+	    
+	    String oper = "/";
+	    String row = oper+","+firstN+","+secondN+","+output;
+	    
+	    try 
+	    {
+	    	BufferedWriter w = new BufferedWriter(new FileWriter(file, true));
+	    	w.write(row);
+	    	w.write("\r");
+	    	w.close();
+	    }
+	    
+	    catch (IOException e)
+	    {
+	    	e.getStackTrace();
+	    }
+		
 	}
 	
-	
-	public static void multiply(int firstN, int secondN)
+	public static void multiply(int firstN, int secondN, String file) throws IOException
 	{
-		int sum = firstN*secondN;
-	    
-	    System.out.printf("Multiplication of %d and %d = %d", firstN, secondN, sum);
+		int output = firstN+secondN;
+	    System.out.printf("Multiplication of %d and %d = %d", firstN, secondN, output);
 	    System.out.println("\n");
+	    
+	    String oper = "*";
+	    String row = oper+","+firstN+","+secondN+","+output;
+	    
+	    try 
+	    {
+	    	BufferedWriter w = new BufferedWriter(new FileWriter(file, true));
+	    	w.write(row);
+	    	w.write("\r");
+	    	w.close();
+	    }
+	    
+	    catch (IOException e)
+	    {
+	    	e.getStackTrace();
+	    }
 	}
 	
+	public static void View(String file) throws IOException
+	{
+		Path filename = Path.of(file);
+		String content = Files.readString(filename);
+		System.out.println(content);
+	}
 	
-	
-	
-	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException
 	{
 		//Poor mans banner
 		System.out.println("Welcome to a simple calculator (^>=<^) ");
@@ -78,6 +150,15 @@ public class App {
 	    
 	    boolean state = true;
 	    
+	    String filename = "/Users/hamil/myfirstcalculator/src/main/java/com/hcl/output.txt";
+	    
+	    File f1 = new File(filename);
+	    
+        if(!f1.exists()) 
+        {
+           f1.createNewFile();
+        } 
+	    
 	    while(state)
 	    {
 	    	System.out.println("\n please enter number which math operations do you want to perform? ");
@@ -86,35 +167,40 @@ public class App {
 	    	System.out.println("3.Multiplication");
 	    	System.out.println("4.Division");
 	    	System.out.println("5.Exit program");
+	    	System.out.println("6.View File");
 	    	System.out.println("\n");
 	    	
 	    	int mathinput=input.nextInt();
 	    	
 	    	if(mathinput == 1)
 	    	{
-	    		add(firstNumber, secondNumber);
+	    		add(firstNumber, secondNumber, filename);
 	    	}	
 	    	
-	    	if(mathinput == 2)
+	    	else if(mathinput == 2)
 	    	{
-	    		subtract(firstNumber, secondNumber);
+	    		subtract(firstNumber, secondNumber, filename);
 	    	}	
 	    	
-	    	if(mathinput == 3)
+	    	else if(mathinput == 3)
 	    	{
-	    		multiply(firstNumber, secondNumber);
+	    		multiply(firstNumber, secondNumber, filename);
 	    	}	
 	    	
-	    	if(mathinput == 4)
+	    	else if(mathinput == 4)
 	    	{
-	    		divide(firstNumber, secondNumber);
+	    		divide(firstNumber, secondNumber, filename);
 	    	}	
 	    	
-	    	if(mathinput == 5)
+	    	else if(mathinput == 5)
 	    	{
 	    		state = false;
+	    	}
+	    	
+	    	else if(mathinput == 6)
+	    	{
+	    		View(filename);
 	    	}	
-
 	    }	
 	    
 	    System.out.println("Program exits...Have a nice day!! :) ");
